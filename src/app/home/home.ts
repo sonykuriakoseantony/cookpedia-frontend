@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 import { RouterLink } from "@angular/router";
+import { ApiServices } from '../services/api-services';
 
 @Component({
   selector: 'app-home',
@@ -11,4 +12,19 @@ import { RouterLink } from "@angular/router";
 })
 export class Home {
 
+  allRecipes : any = signal([])
+
+  api = inject(ApiServices)
+
+  ngOnInit(){
+    this.getRecipesForHome();
+  }
+
+  getRecipesForHome() {
+    this.api.getAllRecipesAPI().subscribe((result: any) => {
+      const homeRecipes = result.slice(0, 6);
+      this.allRecipes.set(homeRecipes)
+      console.log(this.allRecipes());
+    } );
+  }
 }
