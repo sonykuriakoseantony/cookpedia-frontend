@@ -5,6 +5,7 @@ import { ApiServices } from '../services/api-services';
 import { SearchPipe } from '../pipes/search-pipe';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Router } from '@angular/router';
 
 //approach for search form was template driven (FormsModule)
 
@@ -22,8 +23,8 @@ export class Recipes {
   cuisineArray : any = signal([]);
   mealTypeArray : any = signal([]);
   dummyAllRecipes : any = [];
-
-  api = inject(ApiServices)
+  api = inject(ApiServices);
+  router = inject(Router);
 
   ngOnInit(){
     this.getRecipes();
@@ -54,6 +55,15 @@ export class Recipes {
 
   filterRecipe(key:string, value:string){
     this.allRecipes.set(this.dummyAllRecipes.filter((recipe:any) => recipe[key] == value))
+  }
+
+  viewRecipe(recipeId:string){
+    if(sessionStorage.getItem("token")){
+      this.router.navigate([`/recipes/${recipeId}/view`]);
+    }else{
+      alert("Please login to access Recipes");
+      this.router.navigate(['/login'])
+    }
   }
 
 }

@@ -1,1 +1,105 @@
-<p>view-recipe works!</p>
+<app-header></app-header>
+<div class="container my-5">
+    <div id="recipe" class="row mb-5">
+        <div class="col-lg-6">
+            <a routerLink="/recipes">Back To Recipe List</a>
+            <br>
+            <img alt={{recipe()?.name}} class="img-fluid my-5 rounded" [src]="recipe()?.image">
+
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-success">Download Recipe</button>
+                <button class="btn btn-primary">Save Recipe</button>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <h1> {{recipe()?.name}} </h1>
+
+            <div class="d-flex justify-content-between align-items-center my-4 p-4 border rounded">
+                <p class="fw-bolder mb-0">Cuisine : <span class="text-success">{{recipe()?.cuisine}}</span></p>
+                <p class="fw-bolder mb-0">Servings : {{recipe()?.servings}}</p>
+                <p class="fw-bolder mb-0">Mode of Cooking : {{recipe()?.difficulty}}</p>
+            </div>
+
+            <div class="d-flex justify-content-evenly mb-5">
+                <div class="d-flex flex-column align-items-center">
+                    <img width="70px" src="https://cdn-icons-png.flaticon.com/256/1147/1147864.png" alt="">
+                    <p class="fw-bolder">Preparation Time</p>
+                    <h6>
+                        <span class="text-danger fw-bolder">{{recipe()?.prepTimeMinutes}}</span> Minutes
+                    </h6>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <img width="70px" src="https://cdn-icons-png.flaticon.com/512/5107/5107387.png" alt="">
+                    <p class="fw-bolder">Cooking Time</p>
+                    <h6>
+                        <span class="text-danger fw-bolder">{{recipe()?.cookTimeMinutes}}</span> Minutes
+                    </h6>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <img width="70px" src="https://cdn1.iconfinder.com/data/icons/fitness-sport/512/calories-512.png"
+                        alt="">
+                    <p class="fw-bolder">Calorie Per Servings</p>
+                    <h6>
+                        <span class="text-danger fw-bolder">{{recipe()?.caloriesPerServing}}</span> kcal
+                    </h6>
+                </div>
+            </div>
+
+            <div>
+                <h2>Ingredients Needed</h2>
+                <div class="my-3"
+                    style="background-image: url(https://cdn-icons-png.flaticon.com/512/9862/9862064.png); background-size: 32%; background-repeat: no-repeat; background-position: bottom 15px right 20px; opacity: 0.8;">
+
+                    <ol
+                        style="background-color: rgb(25 135 84 / 20%); padding: 25px 55px; border-radius: 16px; backdrop-filter: drop-shadow(2px 4px 6px black);">
+                        @for (item of recipe()?.ingredients; track $index) {
+                        <li> {{item}} </li>
+                        }
+                    </ol>
+                </div>
+            </div>
+
+            <div class="mt-5 ">
+                <h2>Cooking Instruction</h2>
+                <div 
+                    style="background-image: url(https://cdn.dribbble.com/userupload/41640245/file/original-2279f2cf87a74b4d96cec0e4777f1722.png?format=webp&resize=400x300&vertical=center); background-size: 30%; background-repeat: repeat-y; background-position: bottom right; opacity: 0.8;">
+
+                    <ol class="padding : 0 25px;"
+                        style="background-color: rgb(218 206 77 / 70%); padding: 25px 55px; border-radius: 16px; mix-blend-mode: darken;">
+                        @for (item of recipe()?.instructions; track $index) {
+                        <li style="width: 80%;"> {{item}} </li>
+                        }
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="mb-5">
+        <h2>Related Recipes</h2>
+
+        <div class="row my-3">
+            <div class="col-lg-2">
+                <div class="p-3 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
+                    <img alt="" class="card-img-top rounded" src="https://cdn.dummyjson.com/recipe-images/8.webp">
+                    <div class="card-body">
+                        <h6 class="card-title">Beef and Broccoli Stir-Fry</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="p-3 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
+                    <img alt="" class="card-img-top rounded" src="https://cdn.dummyjson.com/recipe-images/8.webp">
+                    <div class="card-body">
+                        <h6 class="card-title">Beef and Broccoli Stir-Fry</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

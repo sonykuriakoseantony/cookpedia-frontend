@@ -6,9 +6,8 @@
   <p>More than 100 plus Recipes from around the world</p>
 
   <form
-    novalidate
     class="shadow border rounded p-5 mt-5"
-    style="width: 400px;"
+    style="width: 400px;"  [formGroup]="loginForm" (ngSubmit)="login()"
   >
     <div class="mb-5 text-center">
       <h3>
@@ -17,22 +16,19 @@
     </div>
 
     <div class="mb-3">
-      <input
-        name="email"
-        type="email"
-        placeholder="E-Mail"
-        class="form-control"
-      >
-    </div>
+          <input name="email" formControlName="email" type="email" placeholder="E-Mail" class="form-control">
+        </div>
 
-    <div class="mb-3">
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        class="form-control"
-      >
-    </div>
+         @if(loginForm.get('email')?.errors && loginForm.get('email')?.touched){
+            <div class="text-danger fw-medium mb-3" style="font-size: 12px;">*Invalid Email</div>
+        }
+
+        <div class="mb-3">
+          <input name="password" formControlName="password" type="password" placeholder="Password" class="form-control">
+        </div>
+        @if(loginForm.get('password')?.errors && loginForm.get('password')?.touched){
+            <div class="text-danger fw-medium mb-3" style="font-size: 12px;">*Invalid Password</div>
+        }
 
     <div class="d-grid mt-3">
       <button type="submit" class="btn btn-success">Login</button>

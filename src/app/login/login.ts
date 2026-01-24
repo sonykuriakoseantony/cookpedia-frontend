@@ -25,6 +25,7 @@ export class Login {
   }
 
   login() {
+    console.log("User login submitted", this.loginForm.valid);
     if (this.loginForm.valid) {
       this.isLoading = true;
       const userData = this.loginForm.value;
@@ -33,10 +34,10 @@ export class Login {
         next: (response: any) => {
           console.log("User logged in successfully", response);
           // Store user data in localStorage
-          localStorage.setItem('user', JSON.stringify(response));
-          localStorage.setItem('token', response.token);
+          sessionStorage.setItem('user', JSON.stringify(response.user));
+          sessionStorage.setItem('token', response.token);
           alert("Login successful!");
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
           this.isLoading = false;
         },
         error: (error: any) => {

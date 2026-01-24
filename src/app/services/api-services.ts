@@ -8,11 +8,8 @@ export class ApiServices {
   server_url = "http://localhost:3000"
   http = inject(HttpClient)
 
-  //get all recipes by home & recipes page
-  getAllRecipesAPI() {
-    return this.http.get(`${this.server_url}/recipes`);
-  }
-
+  
+//-------------------------Auth Login/Register API--------------------------
   //register user api
   registerAPI(user:any) {
     return this.http.post(`${this.server_url}/register`, user);
@@ -23,6 +20,7 @@ export class ApiServices {
     return this.http.post(`${this.server_url}/login`, user);
   }
 
+  //-------------------------User API--------------------------
   //get user profile
   getUserProfileAPI(userId:any) {
     return this.http.get(`${this.server_url}/user/${userId}`);
@@ -31,6 +29,17 @@ export class ApiServices {
   //update user profile
   updateUserProfileAPI(userId:any, user:any) {
     return this.http.put(`${this.server_url}/user/${userId}`, user);
+  }
+
+  //-------------------------Recipes API--------------------------
+  //get all recipes by home & recipes page
+  getAllRecipesAPI() {
+    return this.http.get(`${this.server_url}/recipes`);
+  }
+
+  //get recipe by id
+  viewRecipeAPI(recipeId:any) {
+    return this.http.get(`${this.server_url}/recipes/${recipeId}`);
   }
 
   //save recipe for user

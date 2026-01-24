@@ -23,27 +23,33 @@ export class Register {
 
   constructor(){
     this.registerForm = this.fb.group({
-      username : ['',Validators.required,Validators.pattern('[a-zA-Z ]*')],
-      email : ['',Validators.required,Validators.email],
-      password : ['',Validators.required,Validators.pattern('[a-zA-Z0-9]*')]
+      username : ['',[Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+      email : ['',[Validators.required,Validators.email]],
+      password : ['',[Validators.required,Validators.pattern('[a-zA-Z0-9]*')]]
     })
   }
 
   register(){
+    console.log("User registration submitted", this.registerForm.valid);
     if(this.registerForm.valid){
       this.isLoading = true;
-      const userData = this.registerForm.value;
-      
-      this.apiService.registerAPI(userData).subscribe({
+      // const userData = this.registerForm.value;
+      const username = this.registerForm.value.username;
+      const email = this.registerForm.value.email;
+      const password = this.registerForm.value.password;
+      console.log("User registration", username);
+      this.apiService.registerAPI({username, email, password}).subscribe({
         next: (response: any) => {
+          this.registerForm.reset();
           console.log("User registered successfully", response);
           alert("Registration successful! Please login.");
           this.router.navigate(['/login']);
           this.isLoading = false;
         },
-        error: (error: any) => {
-          console.error("Registration error:", error);
-          alert(error.error || "Registration failed. Please try again.");
+        error: (reason: any) => {
+          console.error("Registration error:", reason);
+          alert(reason.error || "Registration failed. Please try again.");
+          this.router.navigate(['/login']);
           this.isLoading = false;
         }
       });
