@@ -64,7 +64,7 @@
 
             <div class="mt-5 ">
                 <h2>Cooking Instruction</h2>
-                <div 
+                <div
                     style="background-image: url(https://cdn.dribbble.com/userupload/41640245/file/original-2279f2cf87a74b4d96cec0e4777f1722.png?format=webp&resize=400x300&vertical=center); background-size: 30%; background-repeat: repeat-y; background-position: bottom right; opacity: 0.8;">
 
                     <ol class="padding : 0 25px;"
@@ -81,24 +81,23 @@
     <div class="mb-5">
         <h2>Related Recipes</h2>
 
-        <div class="row my-3">
-            <div class="col-lg-2">
-                <div class="p-3 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
-                    <img alt="" class="card-img-top rounded" src="https://cdn.dummyjson.com/recipe-images/8.webp">
-                    <div class="card-body">
-                        <h6 class="card-title">Beef and Broccoli Stir-Fry</h6>
+        @if (relatedRecipes().length > 0) {
+            <div class="row my-3">
+            @for (relRecipe of relatedRecipes(); track $index) {
+            <div class="col-lg-2" (click)="getRelatedSingleRecipe(relRecipe._id)">
+                <div class="p-2 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
+                    <img alt="" class="card-img-top rounded" [src]="relRecipe?.image">
+                    <div class="card-body mt-2" style="min-height: 40px;">
+                        <h6 class="card-title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"> {{relRecipe?.name}} </h6>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2">
-                <div class="p-3 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
-                    <img alt="" class="card-img-top rounded" src="https://cdn.dummyjson.com/recipe-images/8.webp">
-                    <div class="card-body">
-                        <h6 class="card-title">Beef and Broccoli Stir-Fry</h6>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
+        }
+        @else {
+            <div>No Similar recipes available!</div>
+        }
     </div>
 </div>
 

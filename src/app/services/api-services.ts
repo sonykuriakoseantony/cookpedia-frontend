@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 @Injectable({
@@ -37,11 +37,28 @@ export class ApiServices {
     return this.http.get(`${this.server_url}/recipes`);
   }
 
-  //get recipe by id
-  viewRecipeAPI(recipeId:any) {
-    return this.http.get(`${this.server_url}/recipes/${recipeId}`);
+  appendToken(){
+    const token = sessionStorage.getItem("token");
+    let headers = new HttpHeaders();
+    if(token){
+      headers = headers.set("Authorization", `Bearer ${token}`)
+    }
+    return {headers};
   }
 
+  //get recipe by id
+  viewRecipeAPI(recipeId:any) {
+    return this.http.get(`${this.server_url}/recipes/${recipeId}`, this.appendToken());
+  }
+
+  //get recipe by id
+  getRelatedRecipesAPI(cuisine:string) {
+    return this.http.get(`${this.server_url}/recipes-related?cuisine=${cuisine}`, this.appendToken());
+  }
+
+
+
+  //-------not implemented-------------
   //save recipe for user
   saveRecipeAPI(userId:any, recipeId:any) {
     return this.http.post(`${this.server_url}/save-recipe`, {userId, recipeId});
