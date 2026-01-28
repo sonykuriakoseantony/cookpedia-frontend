@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ApiServices } from '../services/api-services';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
+import { jsPDF } from 'jspdf';
+import { autoTable } from 'jspdf-autotable';
 
 @Component({
   selector: 'app-view-recipe',
@@ -21,10 +23,9 @@ export class ViewRecipe {
 
   ngOnInit() {
     this.getSingleRecipe(this.recipeId);
-    
   }
 
-  getSingleRecipe(id:string) {
+  getSingleRecipe(id: string) {
     this.apiService.viewRecipeAPI(id).subscribe((res: any) => {
       this.recipe.set(res);
       console.log(this.recipe());
@@ -35,22 +36,71 @@ export class ViewRecipe {
   }
 
   getRelatedRecipes(cuisine: string) {
-    console.log("Inside getRelatedRecipes");
-    
+    console.log('Inside getRelatedRecipes');
+
     this.apiService.getRelatedRecipesAPI(cuisine).subscribe((res: any) => {
-      if(res.length > 1){
-        console.log("Inside getRelatedRecipes check");
-        this.relatedRecipes.set(res.filter((item:any) => item.name!=this.recipe().name))
+      if (res.length > 1) {
+        console.log('Inside getRelatedRecipes check');
+        this.relatedRecipes.set(res.filter((item: any) => item.name != this.recipe().name));
         console.log(this.relatedRecipes());
-      }
-      else{
-        this.relatedRecipes.set([])
+      } else {
+        this.relatedRecipes.set([]);
       }
     });
   }
 
-  getRelatedSingleRecipe(id:string){
+  getRelatedSingleRecipe(id: string) {
     this.getSingleRecipe(id);
-    this.navigate.navigateByUrl(`recipes/${id}/view`)
+    this.navigate.navigateByUrl(`recipes/${id}/view`);
   }
+
+  downloadRecipe() {
+    this.apiService
+      .downloadRecipeAPI(this.recipeId, {
+        name: this.recipe().name,
+        cuisine: this.recipe().cuisine,
+        image: this.recipe().image,
+      })
+      .subscribe((res: any) => {
+        console.log(res);
+        //generate a pdf to downloaded recipe as pdf
+        this.generatePDF();
+      });
+  }
+
+  generatePDF() {
+    const pdf = new jsPDF();
+    let headRow = ['Name', 'Cuisine', 'Ingredients', 'Instructions', 'Calories', 'Servings'];
+    let contentRow = [
+      this.recipe().name,
+      this.recipe().cuisine,
+      this.recipe().ingredients,
+      this.recipe().instructions,
+      this.recipe().caloriesPerServing,
+      this.recipe().servings,
+    ];
+
+    autoTable(pdf, {
+      head: [headRow],
+      body: [contentRow],
+    });
+    pdf.save(`${this.recipe().name}.pdf`);
+  }
+
+  saveRecipeToCollection() {
+    this.apiService
+      .saveRecipeToCollectionAPI(this.recipeId, {
+        name: this.recipe().name,
+        image: this.recipe().image,
+      })
+      .subscribe({
+        next : (res:any)=>{
+          alert(`${this.recipe().name} Added to your Collection!`)
+        },
+        error : (reason:any)=> {
+          alert(reason.error)
+        }
+      });
+  }
+
 }

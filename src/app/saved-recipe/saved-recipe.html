@@ -1,1 +1,29 @@
-<p>saved-recipe works!</p>
+<app-header></app-header>
+    <div class="container my-5">
+        <h1>Recipe Collection</h1>
+
+        @if (savedRecipes().length > 0) {
+            <div class="row my-3">
+            @for (recipe of savedRecipes(); track $index) {
+            <div class="col-lg-3" routerLink="/recipes/{{recipe.recipeId}}/view">
+                <div class="p-2 rounded border hover:shadow" style="cursor: pointer;" tabindex="0">
+                    <img alt="" class="card-img-top rounded" [src]="recipe?.image">
+                    <div class="card-body mt-2" style="min-height: 84px;">
+                        <h6 class="card-title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"> {{recipe?.name}} </h6>
+                        <div class="d-flex justify-content-end mt-2">
+                            <button class="btn">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+        @else {
+            <div>You have not saved any recipes yet!</div>
+        }
+    </div>
+
+<app-footer></app-footer>

@@ -56,27 +56,20 @@ export class ApiServices {
     return this.http.get(`${this.server_url}/recipes-related?cuisine=${cuisine}`, this.appendToken());
   }
 
-
-
-  //-------not implemented-------------
-  //save recipe for user
-  saveRecipeAPI(userId:any, recipeId:any) {
-    return this.http.post(`${this.server_url}/save-recipe`, {userId, recipeId});
+  //download recipe
+  downloadRecipeAPI(recipeId:string, reqBody:any) {
+    return this.http.post(`${this.server_url}/downloads/${recipeId}`, reqBody, this.appendToken());
   }
 
-  //get saved recipes for user
-  getSavedRecipesAPI(userId:any) {
-    return this.http.get(`${this.server_url}/saved-recipes/${userId}`);
+  //save recipe
+  saveRecipeToCollectionAPI(recipeId:string, reqBody:any) {
+    return this.http.post(`${this.server_url}/save-recipe/${recipeId}`, reqBody, this.appendToken());
   }
 
-  //delete saved recipe
-  deleteSavedRecipeAPI(userId:any, recipeId:any) {
-    return this.http.delete(`${this.server_url}/saved-recipe/${userId}/${recipeId}`);
+  //save recipe
+  getAllSavedRecipesAPI() {
+    return this.http.get(`${this.server_url}/saved-recipes`, this.appendToken());
   }
 
-  //get all recipes by search
-  searchRecipesAPI(searchTerm:any) {
-    return this.http.get(`${this.server_url}/recipes/search?query=${searchTerm}`);
-  }
 
 }

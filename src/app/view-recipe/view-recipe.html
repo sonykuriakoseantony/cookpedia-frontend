@@ -7,8 +7,8 @@
             <img alt={{recipe()?.name}} class="img-fluid my-5 rounded" [src]="recipe()?.image">
 
             <div class="d-flex justify-content-between">
-                <button class="btn btn-success">Download Recipe</button>
-                <button class="btn btn-primary">Save Recipe</button>
+                <button class="btn btn-success" (click)="downloadRecipe()">Download Recipe</button>
+                <button class="btn btn-primary" (click)="saveRecipeToCollection()">Save Recipe</button>
             </div>
         </div>
 
