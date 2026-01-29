@@ -66,10 +66,14 @@ export class ApiServices {
     return this.http.post(`${this.server_url}/save-recipe/${recipeId}`, reqBody, this.appendToken());
   }
 
-  //save recipe
+  //get all saved recipe
   getAllSavedRecipesAPI() {
     return this.http.get(`${this.server_url}/saved-recipes`, this.appendToken());
   }
 
+  //delete a saved recipe
+  removeSavedRecipesAPI(id:string) {
+    return this.http.delete(`${this.server_url}/saved-recipes/${id}/delete`, this.appendToken());
+  }
 
 }

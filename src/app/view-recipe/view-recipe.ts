@@ -89,7 +89,7 @@ export class ViewRecipe {
 
   saveRecipeToCollection() {
     this.apiService
-      .saveRecipeToCollectionAPI(this.recipeId, {
+      .saveRecipeToCollectionAPI(this.recipe()._id, {
         name: this.recipe().name,
         image: this.recipe().image,
       })
