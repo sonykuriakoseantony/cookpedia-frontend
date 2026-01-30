@@ -76,4 +76,14 @@ export class ApiServices {
     return this.http.delete(`${this.server_url}/saved-recipes/${id}/delete`, this.appendToken());
   }
 
+  //-------------------------Feedbacks API--------------------------
+  //add feedbacks
+  addFeedbackAPI(reqBody:any) {
+    return this.http.post(`${this.server_url}/feedback/add`, reqBody);
+  }
+  //add feedbacks
+  getAllFeedbacksAPI() {
+    return this.http.get(`${this.server_url}/feedbacks`);
+  }
+
 }

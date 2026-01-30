@@ -102,30 +102,12 @@
         <p class="text-secondary">What our users say about us</p>
         <div class="d-flex scroll-text my-5">
             <!-- Feedbacks to be repeated -->
+            @for (item of allFeedbacks(); track $index) {
             <div class="border p-3 shadow-sm rounded me-2 text-wrap" style="width: 33.3331%;">
-                <h5>Client name</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto fuga ab fugit alias sed deserunt
-                    reiciendis aliquam quidem libero, reprehenderit tempora nemo ducimus expedita non minima dignissimos
-                    eveniet culpa dolores.</p>
+                <h5> {{item?.name}} </h5>
+                <p> {{item?.message}} </p>
             </div>
-            <div class="border p-3 shadow-sm rounded me-2 text-wrap" style="width: 33.3331%;">
-                <h5>Client name</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto fuga ab fugit alias sed deserunt
-                    reiciendis aliquam quidem libero, reprehenderit tempora nemo ducimus expedita non minima dignissimos
-                    eveniet culpa dolores.</p>
-            </div>
-            <div class="border p-3 shadow-sm rounded me-2 text-wrap" style="width: 33.3331%;">
-                <h5>Client name</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto fuga ab fugit alias sed deserunt
-                    reiciendis aliquam quidem libero, reprehenderit tempora nemo ducimus expedita non minima dignissimos
-                    eveniet culpa dolores.</p>
-            </div>
-            <div class="border p-3 shadow-sm rounded me-2 text-wrap" style="width: 33.3331%;">
-                <h5>Client name</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto fuga ab fugit alias sed deserunt
-                    reiciendis aliquam quidem libero, reprehenderit tempora nemo ducimus expedita non minima dignissimos
-                    eveniet culpa dolores.</p>
-            </div>
+            }
         </div>
     </div>
 

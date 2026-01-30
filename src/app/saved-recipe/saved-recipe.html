@@ -11,7 +11,7 @@
                     <div class="card-body mt-2" style="min-height: 84px;">
                         <h6  routerLink="/recipes/{{recipe.recipeId}}/view" class="card-title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"> {{recipe?.name}} </h6>
                         <div class="d-flex justify-content-end mt-2">
-                            <button class="btn" (click)="reoveSavedRecipe(recipe?._id)">
+                            <button class="btn" (click)="removeSavedRecipe(recipe?._id)">
                             <i class="fa-solid fa-trash text-danger"></i>
                         </button>
                         </div>

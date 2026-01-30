@@ -12,12 +12,13 @@ import { ApiServices } from '../services/api-services';
 })
 export class Home {
 
-  allRecipes : any = signal([])
-
-  api = inject(ApiServices)
+  allRecipes : any = signal([]);
+  allFeedbacks : any = signal([]);
+  api = inject(ApiServices);
 
   ngOnInit(){
     this.getRecipesForHome();
+    this.getAllFeedbacks();
   }
 
   getRecipesForHome() {
@@ -26,5 +27,15 @@ export class Home {
       this.allRecipes.set(homeRecipes)
       console.log(this.allRecipes());
     } );
+  }
+
+  getAllFeedbacks(){
+    //fetch feedbacks from db
+    this.api.getAllFeedbacksAPI().subscribe((result : any) => {
+      // const testimonials = result.slice(0, 6);
+      this.allFeedbacks.set(result);
+      console.log(this.allFeedbacks());
+      
+    })
   }
 }

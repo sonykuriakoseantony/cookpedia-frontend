@@ -26,7 +26,7 @@ export class SavedRecipe {
     });
   }
 
-  reoveSavedRecipe(id:string){
+  removeSavedRecipe(id:string){
     this.apiService.removeSavedRecipesAPI(id).subscribe((res:any) => {
       this.getSavedCollection()
     })
