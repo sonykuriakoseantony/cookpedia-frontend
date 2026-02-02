@@ -19,6 +19,7 @@ export class Home {
   ngOnInit(){
     this.getRecipesForHome();
     this.getAllFeedbacks();
+    this.getApprovedFeedbacks();
   }
 
   getRecipesForHome() {
@@ -32,9 +33,17 @@ export class Home {
   getAllFeedbacks(){
     //fetch feedbacks from db
     this.api.getAllFeedbacksAPI().subscribe((result : any) => {
-      // const testimonials = result.slice(0, 6);
       this.allFeedbacks.set(result);
       console.log(this.allFeedbacks());
+      
+    })
+  }
+
+  getApprovedFeedbacks(){
+    //fetch feedbacks from db
+    this.api.getApprovedFeedbacksAPI().subscribe((result : any) => {
+      this.allFeedbacks.set(result);
+      // console.log(this.allFeedbacks());
       
     })
   }

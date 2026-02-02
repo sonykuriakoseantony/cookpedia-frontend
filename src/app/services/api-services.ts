@@ -8,7 +8,14 @@ export class ApiServices {
   server_url = "http://localhost:3000"
   http = inject(HttpClient)
 
-  
+  appendToken(){
+    const token = sessionStorage.getItem("token");
+    let headers = new HttpHeaders();
+    if(token){
+      headers = headers.set("Authorization", `Bearer ${token}`)
+    }
+    return {headers};
+  }
 //-------------------------Auth Login/Register API--------------------------
   //register user api
   registerAPI(user:any) {
@@ -27,23 +34,15 @@ export class ApiServices {
   }
 
   //update user profile
-  updateUserProfileAPI(userId:any, user:any) {
-    return this.http.put(`${this.server_url}/user/${userId}`, user);
+  updateUserProfileAPI(userId:string, reqBody:any) {
+    return this.http.put(`${this.server_url}/users/${userId}`, reqBody, this.appendToken());
   }
+  
 
   //-------------------------Recipes API--------------------------
   //get all recipes by home & recipes page
   getAllRecipesAPI() {
     return this.http.get(`${this.server_url}/recipes`);
-  }
-
-  appendToken(){
-    const token = sessionStorage.getItem("token");
-    let headers = new HttpHeaders();
-    if(token){
-      headers = headers.set("Authorization", `Bearer ${token}`)
-    }
-    return {headers};
   }
 
   //get recipe by id
@@ -59,6 +58,11 @@ export class ApiServices {
   //download recipe
   downloadRecipeAPI(recipeId:string, reqBody:any) {
     return this.http.post(`${this.server_url}/downloads/${recipeId}`, reqBody, this.appendToken());
+  }
+
+  //get all downloaded recipes
+  getUserDownloadedRecipesAPI() {
+    return this.http.get(`${this.server_url}/user-downloads`, this.appendToken());
   }
 
   //save recipe
@@ -81,9 +85,14 @@ export class ApiServices {
   addFeedbackAPI(reqBody:any) {
     return this.http.post(`${this.server_url}/feedback/add`, reqBody);
   }
-  //add feedbacks
+  //all feedbacks
   getAllFeedbacksAPI() {
     return this.http.get(`${this.server_url}/feedbacks`);
+  }
+
+  //get approved feedbacks
+  getApprovedFeedbacksAPI() {
+    return this.http.get(`${this.server_url}/approved-feedbacks`);
   }
 
 }

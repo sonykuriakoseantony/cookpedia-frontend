@@ -1,1 +1,64 @@
-<p>profile works!</p>
+<app-header></app-header>
+<div class="container">
+
+    <!-- Top Green Bar -->
+    <div class="row bg-success" style="height: 200px;"></div>
+
+    <!-- Profile Image Wrapper -->
+    <div class="d-inline-block p-2 border bg-white rounded-circle position-relative" style="margin-top: -110px; position: relative;">
+        <img [src]="imgURL()" alt="picture" class="img-fluid rounded-circle profile-img">
+        <!-- Upload Button -->
+    <label for="upload" class="mt-3" style="position: absolute; bottom: 0; right: 30px;">
+        <span class="btn bg-success text-light">
+            <i class="fa-solid fa-upload"></i>
+        </span>
+        <input (change)="uploadPicture($event)" type="file" id="upload" hidden accept="image/*">
+    </label>
+    </div>
+
+    <div class="my-3 d-flex align-items-center">
+        <h1>{{username}}</h1>
+        <i class="fa-solid fa-check-circle text-primary fa-2x ms-2"></i>
+    </div>
+
+    <p style="text-align: justify;">
+        🍲 Passionate about discovering simple, delicious recipes and experimenting
+        in the kitchen. I enjoy trying new cuisines, adding my own twists to classic
+        dishes, and sharing my cooking experiences with the Cookpedia community.
+    </p>
+
+    <p>
+        ✨ On Cookpedia, I love exploring quick meals, healthy recipes, and traditional
+        favorites that bring comfort and flavor together.
+    </p>
+
+    <p>
+        📍 Favorite Cuisines: Indian, Italian, Continental
+    </p>
+
+    <p>
+        ❤️ Cooking Level: Beginner → Intermediate
+    </p>
+
+    <p>
+        ⏱️ Cooking Style: Quick & Easy Meals
+    </p>
+
+
+    <!-- Downloaded Recipes -->
+    <h3 class="mt-5">Downloaded Recipe List</h3>
+
+    <div class="row my-3">
+
+        @for (item of downloadedREcipes(); track $index) {
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2" routerLink="/recipes/{{item.recipeId}}/view" style="cursor: pointer;">
+                <img [src]="item.image" class="card-img-top recipe-img" alt="">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <h5 class="card-title"> {{item.name}} </h5>
+                </div>
+        </div>
+        }
+    </div>
+</div>
+
+<app-footer></app-footer>
