@@ -60,9 +60,14 @@ export class ApiServices {
     return this.http.post(`${this.server_url}/downloads/${recipeId}`, reqBody, this.appendToken());
   }
 
-  //get all downloaded recipes
+  //get all user downloaded recipes
   getUserDownloadedRecipesAPI() {
     return this.http.get(`${this.server_url}/user-downloads`, this.appendToken());
+  }
+
+  //get all user downloaded recipes by admin
+  getAllDownloadedRecipesAPI() {
+    return this.http.get(`${this.server_url}/downloads`, this.appendToken());
   }
 
   //save recipe

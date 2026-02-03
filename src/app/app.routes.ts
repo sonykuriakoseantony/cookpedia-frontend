@@ -11,6 +11,13 @@ import { ViewRecipe } from './view-recipe/view-recipe';
 import { SavedRecipe } from './saved-recipe/saved-recipe';
 
 export const routes: Routes = [
+    //pages to lazy load
+    //Admin base url - http://localhost:4200/admin
+
+    {
+        path : 'admin', loadChildren : ()=> import ('./admin/admin-module').then(module=>module.AdminModule)
+    },
+
     //home route
     {
         path : '',
