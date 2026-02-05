@@ -18,9 +18,7 @@ export class Downloads {
   getAllDownloads(){
     this.apiService.getAllDownloadedRecipesAPI().subscribe((res:any)=>{
       this.allDownloads.set(res);
-
       console.log(this.allDownloads());
-      
     })
   }
 }

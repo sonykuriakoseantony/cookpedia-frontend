@@ -8,29 +8,39 @@
 
             <table class="table my-5 shadow">
                 <thead>
-                    <tr>
+                    <tr class="table-success">
                         <th>#</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Feedback</th>
-                        <th>Action / Status</th>
+                        <th class="pe-4">Action/Status</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @for (item of allFeedbacks(); track $index; let i = $index) {
-                        <tr>
+                    <tr>
                         <td> {{i+1}} </td>
                         <td> {{item.name}} </td>
                         <td> {{item.email}} </td>
                         <td> {{item.message}} </td>
-                        <td class="d-flex gap-2">
-                            <button class="btn btn-success">
-                                <i class="fa-solid fa-check text-light"></i>
-                            </button>
-                            <button class="btn btn-danger">
-                                <i class="fa-solid fa-close text-light"></i>
-                            </button>
+                        <td class="ps-3">
+
+                            @if (item.status == "pending") {
+                                <div class="d-flex">
+                                    <button class="btn btn-success me-2" (click)="updateFeedbackStatus(item._id,'approve')">
+                                        <i class="fa-solid fa-check text-light"></i>
+                                    </button>
+                                    <button class="btn btn-danger" (click)="updateFeedbackStatus(item._id,'reject')">
+                                        <i class="fa-solid fa-close text-light"></i>
+                                    </button>
+                                </div>
+                            }
+                            @else if(item.status == "approve"){
+                                <button class="btn btn-success">Approved</button>
+                            }
+                            @else {
+                                <button class="btn btn-danger">Rejected</button>
+                            }
                         </td>
                     </tr>
                     }

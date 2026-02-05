@@ -1,1 +1,192 @@
-<p>manage-recipe works!</p>
+<div class="d-flex justify-content-center flex-column align-items-center">
+    <h1 class="my-5">
+        @if (recipeId) {
+            Update
+        }   
+        @else {
+            Add
+        }
+        Recipe Details
+    </h1>
+    <div class="container my-5 border rounded text-center p-5 shadow w-75">
+
+  <div class="row">
+    <!-- Left Column -->
+    <div class="col-6">
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Name"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Preparation time in Minutes"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Image URL"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <label for="cuisine">Choose Cuisine type</label>
+        <select id="cuisine" class="form-control">
+          <option selected hidden disabled>Choose Cuisine type</option>
+          <option value="Smoothie">Smoothie</option>
+          <option value="Italian">Italian</option>
+          <option value="Greek">Greek</option>
+          <option value="Pakistani">Pakistani</option>
+          <option value="Indian">Indian</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Russian">Russian</option>
+          <option value="Asian">Asian</option>
+          <option value="Mediterranean">Mediterranean</option>
+          <option value="Turkish">Turkish</option>
+          <option value="Lebanese">Lebanese</option>
+          <option value="American">American</option>
+          <option value="Thai">Thai</option>
+          <option value="Moroccan">Moroccan</option>
+          <option value="Brazilian">Brazilian</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Korean">Korean</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <textarea
+            placeholder="Add Recipe Ingredients"
+            class="form-control"
+          ></textarea>
+          <button class="btn btn-primary ms-1">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-6">
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Servings (ex: 4 )"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Cooking time in Minutes"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <input
+          placeholder="Recipe Calorie Per Servings (ex: 350)"
+          type="text"
+          class="form-control"
+        >
+      </div>
+
+      <div class="mb-2">
+        <label for="difficulty">Choose Mode of Cooking</label>
+        <select id="difficulty" class="form-control">
+          <option selected hidden disabled>Choose Mode of Cooking</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <textarea
+            placeholder="Cooking Instructions"
+            class="form-control"
+          ></textarea>
+          <button class="btn btn-primary ms-1">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Meal Type -->
+  <div class="mb-3">
+    <div class="border rounded p-2">
+      <p class="mb-2">
+        Choose Meal Type of the Recipe :
+      </p>
+
+      <div class="d-flex flex-wrap my-1">
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Breakfast"> Breakfast
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Beverage"> Beverage
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Appetizer"> Appetizer
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Dinner"> Dinner
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Lunch"> Lunch
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Side Dish"> Side Dish
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Dessert"> Dessert
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Snacks"> Snacks
+          </label>
+        </div>
+
+        <div class="border rounded p-1 m-2">
+          <label>
+            <input type="checkbox" name="Snack"> Snack
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-success">Add Recipe</button>
+
+</div>
+
+</div>

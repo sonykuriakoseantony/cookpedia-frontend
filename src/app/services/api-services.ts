@@ -5,39 +5,43 @@ import { inject, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiServices {
-  server_url = "http://localhost:3000"
-  http = inject(HttpClient)
+  server_url = 'http://localhost:3000';
+  http = inject(HttpClient);
 
-  appendToken(){
-    const token = sessionStorage.getItem("token");
+  appendToken() {
+    const token = sessionStorage.getItem('token');
     let headers = new HttpHeaders();
-    if(token){
-      headers = headers.set("Authorization", `Bearer ${token}`)
+    if (token) {
+      headers = headers.set("Authorization", `Bearer ${token}`).set('Content-Type', 'application/json')
     }
     return {headers};
   }
-//-------------------------Auth Login/Register API--------------------------
+  //-------------------------Auth Login/Register API--------------------------
   //register user api
-  registerAPI(user:any) {
+  registerAPI(user: any) {
     return this.http.post(`${this.server_url}/register`, user);
   }
 
   //login user api
-  loginAPI(user:any) {
+  loginAPI(user: any) {
     return this.http.post(`${this.server_url}/login`, user);
   }
 
   //-------------------------User API--------------------------
   //get user profile
-  getUserProfileAPI(userId:any) {
+  getUserProfileAPI(userId: any) {
     return this.http.get(`${this.server_url}/user/${userId}`);
   }
 
   //update user profile
-  updateUserProfileAPI(userId:string, reqBody:any) {
+  updateUserProfileAPI(userId: string, reqBody: any) {
     return this.http.put(`${this.server_url}/users/${userId}`, reqBody, this.appendToken());
   }
-  
+
+  //get all users by admin
+  getAllUsersAPI() {
+    return this.http.get(`${this.server_url}/users`, this.appendToken());
+  }
 
   //-------------------------Recipes API--------------------------
   //get all recipes by home & recipes page
@@ -46,17 +50,20 @@ export class ApiServices {
   }
 
   //get recipe by id
-  viewRecipeAPI(recipeId:any) {
+  viewRecipeAPI(recipeId: any) {
     return this.http.get(`${this.server_url}/recipes/${recipeId}`, this.appendToken());
   }
 
   //get recipe by id
-  getRelatedRecipesAPI(cuisine:string) {
-    return this.http.get(`${this.server_url}/recipes-related?cuisine=${cuisine}`, this.appendToken());
+  getRelatedRecipesAPI(cuisine: string) {
+    return this.http.get(
+      `${this.server_url}/recipes-related?cuisine=${cuisine}`,
+      this.appendToken(),
+    );
   }
 
   //download recipe
-  downloadRecipeAPI(recipeId:string, reqBody:any) {
+  downloadRecipeAPI(recipeId: string, reqBody: any) {
     return this.http.post(`${this.server_url}/downloads/${recipeId}`, reqBody, this.appendToken());
   }
 
@@ -71,8 +78,12 @@ export class ApiServices {
   }
 
   //save recipe
-  saveRecipeToCollectionAPI(recipeId:string, reqBody:any) {
-    return this.http.post(`${this.server_url}/save-recipe/${recipeId}`, reqBody, this.appendToken());
+  saveRecipeToCollectionAPI(recipeId: string, reqBody: any) {
+    return this.http.post(
+      `${this.server_url}/save-recipe/${recipeId}`,
+      reqBody,
+      this.appendToken(),
+    );
   }
 
   //get all saved recipe
@@ -81,18 +92,14 @@ export class ApiServices {
   }
 
   //delete a saved recipe
-  removeSavedRecipesAPI(id:string) {
+  removeSavedRecipesAPI(id: string) {
     return this.http.delete(`${this.server_url}/saved-recipes/${id}/delete`, this.appendToken());
   }
 
   //-------------------------Feedbacks API--------------------------
   //add feedbacks
-  addFeedbackAPI(reqBody:any) {
+  addFeedbackAPI(reqBody: any) {
     return this.http.post(`${this.server_url}/feedback/add`, reqBody);
-  }
-  //all feedbacks
-  getAllFeedbacksAPI() {
-    return this.http.get(`${this.server_url}/feedbacks`);
   }
 
   //get approved feedbacks
@@ -100,4 +107,17 @@ export class ApiServices {
     return this.http.get(`${this.server_url}/approved-feedbacks`);
   }
 
+  //all feedbacks by admin
+  getAllFeedbacksAPI() {
+    return this.http.get(`${this.server_url}/feedbacks`, this.appendToken());
+  }
+
+  //update feedbacks by admin
+  updateFeedbacksAPI(feedId: string, reqBody: any) {
+    return this.http.put(
+      `${this.server_url}/feedbacks/${feedId}/update`,
+      reqBody,
+      this.appendToken(),
+    );
+  }
 }

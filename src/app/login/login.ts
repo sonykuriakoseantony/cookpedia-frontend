@@ -37,7 +37,13 @@ export class Login {
           sessionStorage.setItem('user', JSON.stringify(response.user));
           sessionStorage.setItem('token', response.token);
           alert("Login successful!");
-          this.router.navigate(['/']);
+          if(response.user.role == 'user'){
+            this.router.navigate(['/']);
+          }
+          else{
+            this.router.navigate(['/admin']);
+          }
+          
           this.isLoading = false;
         },
         error: (error: any) => {

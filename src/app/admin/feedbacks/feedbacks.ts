@@ -20,7 +20,12 @@ export class Feedbacks {
     this.apiService.getAllFeedbacksAPI().subscribe((res:any)=>{
       this.allFeedbacks.set(res);
       console.log(this.allFeedbacks());
-      
+    })
+  }
+
+  updateFeedbackStatus(id:string, status:string){
+    this.apiService.updateFeedbacksAPI(id, {status}).subscribe((res:any)=>{
+      this.getAllFeedbacks();
     })
   }
 }

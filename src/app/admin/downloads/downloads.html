@@ -8,7 +8,7 @@
 
             <table class="table my-5 shadow">
                 <thead>
-                    <tr>
+                    <tr class="table-success">
                         <th>#</th>
                         <th>Recipe Id</th>
                         <th>Recipe Name</th>
@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                     @for (item of allDownloads(); track $index; let i = $index) {
-                        <tr>
+                    <tr>
                         <td> {{i+1}} </td>
                         <td> {{item.recipeId}} </td>
                         <td> {{item.name}} </td>
@@ -26,7 +26,6 @@
                         <td> {{item.count}} </td>
                     </tr>
                     }
-                    
                 </tbody>
             </table>
 
