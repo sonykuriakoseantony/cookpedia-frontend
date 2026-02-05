@@ -36,20 +36,12 @@ export class Recipes {
       this.dummyAllRecipes = result;
       let dummyCuisineArray = result.map((item:any)=>item.cuisine);
       dummyCuisineArray.forEach((cuisine : any) => {
-
         !this.cuisineArray().includes(cuisine) && this.cuisineArray().push(cuisine)
-        
       });
-
-
       let dummyMealArray = result.map((item:any)=>item.mealType).flat(Infinity);
       dummyMealArray.forEach((meal : any) => {
-
         !this.mealTypeArray().includes(meal) && this.mealTypeArray().push(meal)
-        
       });
-
-      
     } );
   }
 

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { RecipeModel } from '../admin/models/recipeModel';
 
 @Injectable({
   providedIn: 'root',
@@ -94,6 +95,16 @@ export class ApiServices {
   //delete a saved recipe
   removeSavedRecipesAPI(id: string) {
     return this.http.delete(`${this.server_url}/saved-recipes/${id}/delete`, this.appendToken());
+  }
+
+  //add recipe by admin
+  addRecipeAPI(reqBody:RecipeModel) {
+    return this.http.post(`${this.server_url}/recipes/add`, reqBody, this.appendToken());
+  }
+
+   //edit recipe
+  ediptRecipeAPI(id:string, reqBody:RecipeModel) {
+    return this.http.put(`${this.server_url}/recipes/${id}/update`, reqBody, this.appendToken());
   }
 
   //-------------------------Feedbacks API--------------------------
