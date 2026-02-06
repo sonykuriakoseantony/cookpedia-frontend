@@ -1,19 +1,22 @@
 <div class="container-fluid px-0">
     <div class="row">
+        @if (sidebarOpen) {
         <div class="col-lg-2">
             <app-sidebar></app-sidebar>
         </div>
-        <div class="col-lg-10 px-0">
+        }
+        <div class="col-lg ps-0">
             <!-- Header -->
-            <div class="row bg-warning text-light p-3">
+            <div class="row bg-success text-light p-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <h1>
-                        <button class="btn">
+                        <button class="btn" (click)="toggleSidebar()">
                             <i class="fa-solid fa-bars text-light fa-2x"></i>
                         </button>
                         Welcome To Admin Dashboard
                     </h1>
 
+                    <!-- Logout dropdown -->
                     <div class="dropdown">
                         <button type="button" class="btn dropdown-toggle text-light" data-bs-toggle="dropdown">
                             <i class="fa-solid fa-user"></i>
@@ -21,7 +24,7 @@
 
                         <ul class="dropdown-menu text-center">
                             <li>
-                                <button class="btn fw-bolder">
+                                <button class="btn fw-bolder" (click)="logout()">
                                     Logout <i class="fa-solid fa-right-from-bracket"></i>
                                 </button>
                             </li>
@@ -30,6 +33,64 @@
                 </div>
             </div>
 
+            <!-- Cards -->
+            <div class="row my-5 pe-3">
+                <div class="col-lg-3">
+                    <div class="d-flex justify-content-center align-items-center p-4 rounded text-light"
+                        style="background-color: rgb(255, 193, 7)">
+                        <i class="fa-solid fa-users fs-1"></i>
+                        <div class="ms-3">
+                            <h3 class="mb-0">Users</h3>
+                            <h5>{{userCount()}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex justify-content-center align-items-center p-4 rounded text-light"
+                        style="background-color: rgb(91, 196, 42)">
+                        <i class="fa-solid fa-bowl-rice fs-1"></i>
+                        <div class="ms-3">
+                            <h3 class="mb-0">Recipes</h3>
+                            <h5>{{recipeCount()}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex justify-content-center align-items-center p-4 rounded text-light"
+                        style="background-color: rgb(49, 174, 208)">
+                        <i class="fa-solid fa-download fs-1"></i>
+                        <div class="ms-3">
+                            <h3 class="mb-0">Downloads</h3>
+                            <h5> {{downloadsCount()}} </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex justify-content-center align-items-center p-4 rounded text-light"
+                        style="background-color: rgb(156, 120, 184)">
+                        <i class="fa-solid fa-bell fs-1"></i>
+                        <div class="ms-3">
+                            <h3 class="mb-0">Notifications</h3>
+                            <h5>New feedbacks! <a class="justify-content-center align-items-center"
+                                    style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; background-color: brown; color: rgb(255, 255, 255); text-decoration: none; display: inline-flex; font-size: 14px;"
+                                    routerLink="/admin/feedbacks"> {{feedbacksCount()}} </a></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-lg-8">
+                    <!-- Charts -->
+                     <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'"> </canvas>
+                </div>
+                <div class="col-lg-4">
+                    <!-- Calendar -->
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="selected"></mat-calendar>
+                    </mat-card>
+                </div>
+            </div>
         </div>
     </div>
 </div>

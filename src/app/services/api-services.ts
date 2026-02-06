@@ -102,9 +102,14 @@ export class ApiServices {
     return this.http.post(`${this.server_url}/recipes/add`, reqBody, this.appendToken());
   }
 
-   //edit recipe
+   //edit recipe by admin
   ediptRecipeAPI(id:string, reqBody:RecipeModel) {
     return this.http.put(`${this.server_url}/recipes/${id}/update`, reqBody, this.appendToken());
+  }
+
+  //delete recipe by admin
+  removeRecipeAPI(id:string) {
+    return this.http.delete(`${this.server_url}/recipes/${id}/delete`, this.appendToken());
   }
 
   //-------------------------Feedbacks API--------------------------
@@ -131,4 +136,5 @@ export class ApiServices {
       this.appendToken(),
     );
   }
+  
 }
