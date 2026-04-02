@@ -37,6 +37,9 @@ export class Login {
           sessionStorage.setItem('user', JSON.stringify(response.user));
           sessionStorage.setItem('token', response.token);
           alert("Login successful!");
+
+          this.apiService.getChartDataAPI();
+          
           if(response.user.role == 'user'){
             this.router.navigate(['/']);
           }

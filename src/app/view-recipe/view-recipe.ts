@@ -63,6 +63,9 @@ export class ViewRecipe {
       })
       .subscribe((res: any) => {
         console.log(res);
+
+        this.apiService.getChartDataAPI();
+
         //generate a pdf to downloaded recipe as pdf
         this.generatePDF();
       });

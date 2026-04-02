@@ -136,5 +136,25 @@ export class ApiServices {
       this.appendToken(),
     );
   }
+
+  getChartDataAPI(){
+    this.getAllDownloadedRecipesAPI().subscribe((downloadList:any)=>{
+      let output : any = {}
+      downloadList.forEach((recipe:any) => {
+        let cuisine = recipe.cuisine;
+        let currCount = recipe.count;
+
+        if(cuisine in output){
+          output[cuisine] += currCount;
+        }else{
+          output[cuisine] = currCount;
+        }
+      });
+      const keys = Object.keys(output);
+      localStorage.setItem("labels", JSON.stringify(keys))
+      const data = Object.values(output);
+      localStorage.setItem("data", JSON.stringify(data))
+    })
+  }
   
 }
