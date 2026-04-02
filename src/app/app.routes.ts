@@ -9,13 +9,17 @@ import { Profile } from './profile/profile';
 import { Pnf } from './pnf/pnf';
 import { ViewRecipe } from './view-recipe/view-recipe';
 import { SavedRecipe } from './saved-recipe/saved-recipe';
+import { authGuard } from './guards/auth-guard';
+import { adminAuthGuard } from './guards/admin-auth-guard';
 
 export const routes: Routes = [
     //pages to lazy load
     //Admin base url - http://localhost:4200/admin
 
     {
-        path : 'admin', loadChildren : ()=> import ('./admin/admin-module').then(module=>module.AdminModule)
+        path : 'admin', 
+        canActivate : [adminAuthGuard],
+        loadChildren : ()=> import ('./admin/admin-module').then(module=>module.AdminModule)
     },
 
     //home route
@@ -57,18 +61,21 @@ export const routes: Routes = [
     //Profile route
     {
         path : 'profile',
+        canActivate : [authGuard],
         component : Profile,
         title : 'Profile | Cookpedia'
     },
     //Saved Recipes route
     {
         path : 'recipes/saved',
+        canActivate : [authGuard],
         component : SavedRecipe,
         title : 'Saved Recipes | Cookpedia'
     },
     //View Recipe route
     {
         path : 'recipes/:id/view',
+        canActivate : [authGuard],
         component : ViewRecipe,
         title : 'View Recipe | Cookpedia'
     },
