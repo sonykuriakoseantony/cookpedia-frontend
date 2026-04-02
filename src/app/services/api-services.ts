@@ -6,7 +6,8 @@ import { RecipeModel } from '../admin/models/recipeModel';
   providedIn: 'root',
 })
 export class ApiServices {
-  server_url = 'http://localhost:3000';
+  // server_url = 'http://localhost:3000';
+  server_url = 'https://cookpedia-server-4b9e.onrender.com';
   http = inject(HttpClient);
 
   appendToken() {
